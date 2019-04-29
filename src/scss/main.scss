@@ -1,3 +1,10 @@
 #display {
   border: solid 1px #ddd;
 }
+
+.form-group {
+  label,
+  input {
+    margin-right: 5px;
+  }
+}

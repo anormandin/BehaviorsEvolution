@@ -1,5 +1,7 @@
 import p5 from 'p5/lib/p5';
 
+import Options from './options';
+
 //const MAX_SPEED = 5;
 const MAX_FORCE = 2;
 
@@ -54,11 +56,12 @@ export default class Vehicle {
 
   seekMouse() {
     const steer = this.seek(createVector(mouseX, mouseY));
-    this.applyForce(steer);
+    return steer;
   }
 
   behaviors() {
     let desireSteer = this.seekMouse();
+
     let fearSteer = this.fleeBounds();
     fearSteer.setMag(this.max_speed * 2);
 
@@ -83,6 +86,7 @@ export default class Vehicle {
     beginShape();
     vertex(0, -radius * 2);
     vertex(-radius, radius * 2);
+    vertex(0, -radius * 0.2);
     vertex(radius, radius * 2);
     endShape(CLOSE);
     pop();

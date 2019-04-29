@@ -2,6 +2,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/main.scss';
 
 import Vehicle from './vehicle';
+import OptionControl from './option-control';
+import Options from './options';
 
 import p5 from 'p5/lib/p5';
 
@@ -14,6 +16,14 @@ let vehicles = [];
 window.setup = function() {
   let canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent('sketch');
+
+  new OptionControl().render('options', {
+    id: 'test',
+    label: 'Test',
+    min: 2,
+    max: 15,
+    cur: 5
+  });
 
   for (let i = 0; i < 20; i++) {
     vehicles.push(new Vehicle());
