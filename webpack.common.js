@@ -5,6 +5,7 @@ const WebpackMd5Hash = require('webpack-md5-hash');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
+const {VueLoaderPlugin} = require('vue-loader');
 
 module.exports = {
   entry: { main: './src/index.js' },
@@ -14,6 +15,10 @@ module.exports = {
   },
   module: {
     rules: [
+      {
+        test: /\.vue$/,
+        use: 'vue-loader'
+      },
       {
         test: /\.js$/,
         exclude: /node_modules/,
@@ -35,6 +40,7 @@ module.exports = {
   },
   plugins: [
     new CleanWebpackPlugin('dist', {}),
+    new VueLoaderPlugin(),
     new MiniCssExtractPlugin({
       filename: 'style.[contenthash].css'
     }),

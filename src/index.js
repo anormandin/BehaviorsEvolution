@@ -1,9 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './scss/main.scss';
 
+import Vue from 'vue'
+import Main from './main.vue'
+import Options from './Options/Options.vue'
+
 import Vehicle from './vehicle';
-import OptionControl from './option-control';
-import Options from './options';
+//import OptionControl from './option-control';
+//import Options from './options';
+
 
 import p5 from 'p5/lib/p5';
 
@@ -12,25 +17,23 @@ const HEIGHT = 600;
 const BOUNDS = 25;
 
 let vehicles = [];
+let canvas;
 
 window.setup = function() {
-  let canvas = createCanvas(WIDTH, HEIGHT);
-  canvas.parent('sketch');
+  canvas = createCanvas(WIDTH, HEIGHT);
 
-  // new OptionControl().render('options', {
-  //   id: 'test',
-  //   label: 'Test',
-  //   min: 2,
-  //   max: 15,
-  //   cur: 5
-  // });
-
+  new Vue({
+    el: '#main',
+    render: h => h(Main)
+  });
+  
   for (let i = 0; i < 20; i++) {
     vehicles.push(new Vehicle());
   }
 };
 
 window.draw = function() {
+  canvas.parent('sketch');
   background('#353432');
 
   // Draw a boundaries
@@ -44,6 +47,12 @@ window.draw = function() {
     v.show();
   }
 };
+
+// document.addEventListener("DOMContentLoaded", function(){
+//   const canvas = document.querySelector('canvas');
+//   document.querySelector('#sketch').appendChild(canvas);
+// });
+
 // new P5(function(p5) {
 //   let vehicles = [];
 
