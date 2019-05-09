@@ -17,13 +17,13 @@ window.setup = function() {
   let canvas = createCanvas(WIDTH, HEIGHT);
   canvas.parent('sketch');
 
-  new OptionControl().render('options', {
-    id: 'test',
-    label: 'Test',
-    min: 2,
-    max: 15,
-    cur: 5
-  });
+  // new OptionControl().render('options', {
+  //   id: 'test',
+  //   label: 'Test',
+  //   min: 2,
+  //   max: 15,
+  //   cur: 5
+  // });
 
   for (let i = 0; i < 20; i++) {
     vehicles.push(new Vehicle());

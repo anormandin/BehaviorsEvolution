@@ -6,7 +6,10 @@
   "author": "Margarita Obraztsova <marharyta.obraztsova@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "dev": "NODE_ENV=development webpack-dev-server --mode=development --hot"
+    "dev": "webpack-dev-server --open --hot --config webpack.dev.js",
+    "build": "webpack --config webpack.prod.js",
+    "start": "node server.js",
+    "heroku-postbuild": "webpack --config webpack.prod.js"
   },
   "dependencies": {
     "autoprefixer": "^8.6.3",
