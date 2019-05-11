@@ -22,12 +22,8 @@ export default class Vehicle {
       this.sketch.random(2, this.max_speed)
     );
     this.acc = this.sketch.createVector(0, 0);
-    this.max_speed = this.sketch.random(4, 12);
-    // this.color = this.sketch.lerp(
-    //   this.sketch.color(SLOW_COLOR),
-    //   this.sketch.color(FAST_COLOR),
-    //   0.1
-    // );
+    this.max_speed = this.sketch.random(2, 15);
+
     if (this.max_speed >= 10) this.color = FAST_COLOR;
     else if (this.max_speed > 7) this.color = ORIGINAL_COLOR;
     else this.color = SLOW_COLOR;

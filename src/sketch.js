@@ -5,7 +5,7 @@ import P5 from 'p5';
 const WIDTH = 1100;
 const HEIGHT = 800;
 const BOUNDS = 25;
-const NUM_VEHICLES = 8;
+const NUM_VEHICLES = 25;
 
 export default class Sketch {
   restart() {
