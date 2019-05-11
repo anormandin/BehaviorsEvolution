@@ -3,7 +3,6 @@ import './scss/main.scss';
 
 import Vue from 'vue';
 import Main from './main.vue';
-import Options from './Options/Options.vue';
 
 import Vehicle from './vehicle';
 //import OptionControl from './option-control';
@@ -17,7 +16,6 @@ const BOUNDS = 25;
 const NUM_VEHICLES = 50;
 
 let vehicles = [];
-let canvas;
 
 new Vue({
   el: '#main',
