@@ -1,11 +1,9 @@
 import * as p5 from 'p5/lib/p5';
 
-import Options from './options';
-
 //const MAX_SPEED = 5;
 const MAX_FORCE = 2;
 
-const WIDTH = 1200;
+const WIDTH = 1100;
 const HEIGHT = 800;
 const BOUNDS = 25;
 const SLOW_COLOR = '#1B667D';
