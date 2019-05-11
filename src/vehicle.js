@@ -5,9 +5,12 @@ import Options from './options';
 //const MAX_SPEED = 5;
 const MAX_FORCE = 2;
 
-const WIDTH = 800;
-const HEIGHT = 600;
+const WIDTH = 1200;
+const HEIGHT = 800;
 const BOUNDS = 25;
+const SLOW_COLOR = '#1B667D';
+const FAST_COLOR = '#83E0FC';
+const ORIGINAL_COLOR = '#2790B0';
 
 export default class Vehicle {
   constructor(sketch) {
@@ -22,6 +25,14 @@ export default class Vehicle {
     );
     this.acc = this.sketch.createVector(0, 0);
     this.max_speed = this.sketch.random(4, 12);
+    // this.color = this.sketch.lerp(
+    //   this.sketch.color(SLOW_COLOR),
+    //   this.sketch.color(FAST_COLOR),
+    //   0.1
+    // );
+    if (this.max_speed >= 10) this.color = FAST_COLOR;
+    else if (this.max_speed > 7) this.color = ORIGINAL_COLOR;
+    else this.color = SLOW_COLOR;
   }
 
   update() {
@@ -82,7 +93,7 @@ export default class Vehicle {
 
     // Draw the triangle
     this.sketch.noStroke();
-    this.sketch.fill('#2790B0');
+    this.sketch.fill(this.color);
     this.sketch.push();
     this.sketch.translate(this.pos);
     this.sketch.rotate(angle);

@@ -11,9 +11,10 @@ import Vehicle from './vehicle';
 
 import P5 from 'p5';
 
-const WIDTH = 800;
-const HEIGHT = 600;
+const WIDTH = 1200;
+const HEIGHT = 800;
 const BOUNDS = 25;
+const NUM_VEHICLES = 50;
 
 let vehicles = [];
 let canvas;
@@ -30,7 +31,7 @@ function startSketch() {
       const canvas = sketch.createCanvas(WIDTH, HEIGHT);
       canvas.parent('sketch');
 
-      for (let i = 0; i < 20; i++) {
+      for (let i = 0; i < NUM_VEHICLES; i++) {
         vehicles.push(new Vehicle(sketch));
       }
     };
