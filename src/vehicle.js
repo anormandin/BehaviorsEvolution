@@ -65,13 +65,22 @@ export default class Vehicle {
     let targetX = this.sketch.mouseX;
     let targetY = this.sketch.mouseY;
 
-    // Seek target only if it is on canvas
-    if (targetX > 0 && targetX < WIDTH && targetY > 0 && targetY < HEIGHT) {
-      return { x: targetX, y: targetY };
+    let target = this.sketch.createVector(
+      this.sketch.mouseX,
+      this.sketch.mouseY
+    );
+    const vision = 300;
+    // Seek target only if it is close enough
+    if (
+      this.sketch.int(
+        this.sketch.dist(target.x, target.y, this.pos.x, this.pos.y)
+      ) < vision
+    ) {
+      return { x: target.x, y: target.y };
     } else {
       // Not seeing target, seek center fuzzily
-      targetX = WIDTH / 2 + this.sketch.random(-200, 200);
-      targetY = HEIGHT / 2 + this.sketch.random(-200, 200);
+      const targetX = WIDTH / 2 + this.sketch.random(-200, 200);
+      const targetY = HEIGHT / 2 + this.sketch.random(-200, 200);
       return { x: targetX, y: targetY };
     }
   }
