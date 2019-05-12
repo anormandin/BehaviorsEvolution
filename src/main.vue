@@ -6,7 +6,13 @@
         <div id="sketch"></div>
       </div>
       <div class="row pt-2">
-        <button class="btn btn-primary btn-large" @click="this.restart">Restart</button>
+        <div class="form-group form-inline">
+          <button class="btn btn-primary btn-large" @click="this.restart">Restart</button>
+        </div>
+        <div class="form-group form-inline ml-1">
+          <label for="showFPS">Display FPS</label>
+          <input name="showFPS" type="checkbox" @click="this.toggleFps">
+        </div>
       </div>
     </div>
   </div>
@@ -26,6 +32,10 @@ export default {
   methods: {
     restart() {
       this.sketch.restart();
+    },
+    toggleFps() {
+      console.log('Changed');
+      this.sketch.toggleFps();
     }
   }
 };

@@ -61,26 +61,34 @@ export default class Vehicle {
   }
 
   findTargetToSeek() {
-    let steer = this.sketch.createVector();
-
     // Init potential target at the mouse cursor
     let targetX = this.sketch.mouseX;
     let targetY = this.sketch.mouseY;
 
     // Seek target only if it is on canvas
     if (targetX > 0 && targetX < WIDTH && targetY > 0 && targetY < HEIGHT) {
+      return { x: targetX, y: targetY };
     } else {
       // Not seeing target, seek center fuzzily
       targetX = WIDTH / 2 + this.sketch.random(-200, 200);
       targetY = HEIGHT / 2 + this.sketch.random(-200, 200);
+      return { x: targetX, y: targetY };
+    }
+  }
+
+  // Find someshere to go and return a steering force to there
+  trackingBehaviour() {
+    let steer = this.sketch.createVector();
+    let target = this.findTargetToSeek();
+    if (target) {
+      steer = this.seek(this.sketch.createVector(target.x, target.y));
     }
 
-    steer = this.seek(this.sketch.createVector(targetX, targetY));
-    return steer;
+    return steer; // It's possible that we are not steering anywhere
   }
 
   behaviors() {
-    let desireSteer = this.findTargetToSeek();
+    let desireSteer = this.trackingBehaviour();
 
     let fearSteer = this.fleeBounds();
     fearSteer.setMag(this.max_speed * 2);

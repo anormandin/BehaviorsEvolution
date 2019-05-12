@@ -12,6 +12,10 @@ export default class Sketch {
     this.P5instance.createVehicles();
   }
 
+  toggleFps(show) {
+    this.P5instance.showFps = show || !this.P5instance.showFps;
+  }
+
   start() {
     this.P5instance = new P5(function(sk) {
       sk.createVehicles = function() {
@@ -25,12 +29,23 @@ export default class Sketch {
         const canvas = sk.createCanvas(WIDTH, HEIGHT);
         canvas.parent('sketch');
         this.createVehicles();
+        sk.lastTime = sk.millis();
+        sk.fpsAvg = 0;
+        sk.frameRate(60);
+        sk.showFps = false;
       };
 
       sk.draw = function() {
+        const time = sk.millis();
+        const deltaTime = time - sk.lastTime;
+        sk.lastTime = time;
+        const alpha = 0.9;
+
+        sk.fpsAvg = Math.round(alpha * sk.fpsAvg + 100 / deltaTime);
+
         sk.background('#353432');
 
-        // Draw a boundaries
+        // Draw playfield
         sk.noStroke();
         sk.fill('#4E4D4A');
         sk.rect(BOUNDS, BOUNDS, WIDTH - BOUNDS * 2, HEIGHT - BOUNDS * 2);
@@ -40,15 +55,13 @@ export default class Sketch {
           v.show();
         }
 
-        sk.footerText(
-          `Mouse: (${sk.mouseX},${sk.mouseY})`,
-          WIDTH / 2,
-          HEIGHT - 12
-        );
+        if (sk.showFps) {
+          sk.footerText(`fps: ${sk.fpsAvg}`, WIDTH / 2, HEIGHT - 12);
+        }
       };
 
       sk.footerText = function(text, x, y) {
-        sk.fill(230);
+        sk.fill(200);
         sk.textSize(12);
         sk.textAlign(sk.CENTER);
         sk.text(text, x, y);
