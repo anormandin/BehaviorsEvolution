@@ -39,6 +39,19 @@ export default class Sketch {
           v.update();
           v.show();
         }
+
+        sk.footerText(
+          `Mouse: (${sk.mouseX},${sk.mouseY})`,
+          WIDTH / 2,
+          HEIGHT - 12
+        );
+      };
+
+      sk.footerText = function(text, x, y) {
+        sk.fill(230);
+        sk.textSize(12);
+        sk.textAlign(sk.CENTER);
+        sk.text(text, x, y);
       };
     });
   }

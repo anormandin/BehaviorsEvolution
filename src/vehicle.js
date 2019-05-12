@@ -18,11 +18,11 @@ export default class Vehicle {
       this.sketch.random(BOUNDS, HEIGHT - BOUNDS * 2)
     );
     this.vel = this.sketch.createVector(
-      this.sketch.random(2, this.max_speed),
-      this.sketch.random(2, this.max_speed)
+      this.sketch.random(4, this.max_speed),
+      this.sketch.random(4, this.max_speed)
     );
     this.acc = this.sketch.createVector(0, 0);
-    this.max_speed = this.sketch.random(2, 15);
+    this.max_speed = this.sketch.random(2, 12);
 
     if (this.max_speed >= 10) this.color = FAST_COLOR;
     else if (this.max_speed > 7) this.color = ORIGINAL_COLOR;
@@ -60,15 +60,27 @@ export default class Vehicle {
     return fear;
   }
 
-  seekMouse() {
-    const steer = this.seek(
-      this.sketch.createVector(this.sketch.mouseX, this.sketch.mouseY)
-    );
+  findTargetToSeek() {
+    let steer = this.sketch.createVector();
+
+    // Init potential target at the mouse cursor
+    let targetX = this.sketch.mouseX;
+    let targetY = this.sketch.mouseY;
+
+    // Seek target only if it is on canvas
+    if (targetX > 0 && targetX < WIDTH && targetY > 0 && targetY < HEIGHT) {
+    } else {
+      // Not seeing target, seek center fuzzily
+      targetX = WIDTH / 2 + this.sketch.random(-200, 200);
+      targetY = HEIGHT / 2 + this.sketch.random(-200, 200);
+    }
+
+    steer = this.seek(this.sketch.createVector(targetX, targetY));
     return steer;
   }
 
   behaviors() {
-    let desireSteer = this.seekMouse();
+    let desireSteer = this.findTargetToSeek();
 
     let fearSteer = this.fleeBounds();
     fearSteer.setMag(this.max_speed * 2);
